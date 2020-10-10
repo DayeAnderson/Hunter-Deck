@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
 from .models import Hunter
 
 # Create your views here.
@@ -16,5 +17,10 @@ def hunters_index(request):
 def hunters_detail(request, hunter_id):
   hunter = Hunter.objects.get(id=hunter_id)
   return render(request, 'hunters/detail.html', { 'hunter': hunter })
+
+class HunterCreate(CreateView):
+  model = Hunter
+  fields = ['name', 'rank', 'gender', 'favorite_meal']
+  success_url = '/hunters/'
 
 
