@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>{{ hunter.name }} Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ hunter.name }}</span>
+    <p>Gender: {{ hunter.gender }}</p>
+    <p>Favorite Meal: {{ hunter.favorite_meal }}</p>
+    {% if hunter.rank > 500 %}
+        <p>Rank: {{ hunter.rank }}(Seasoned Monster Hunter!)</p>
+    {% else %}
+        <p>Rank: {{ hunter.rank }}</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

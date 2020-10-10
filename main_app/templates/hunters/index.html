@@ -5,15 +5,13 @@
 
 {% for hunter in hunters %}
   <div class="card">
-    <div class="card-content">
-      <span class="card-title">{{ hunter.name }}</span>
-      <p>Gender: {{ hunter.gender }}</p>
-      {% if hunter.rank > 500 %}
-        <p>Rank: {{ hunter.rank }}(Seasoned Monster Hunter!)</p>
-      {% else %}
+    <a href="{% url 'detail' hunter.id %}">
+        <div class="card-content">
+        <span class="card-title">{{ hunter.name }}</span>
+        <p>Gender: {{ hunter.gender }}</p>
         <p>Rank: {{ hunter.rank }}</p>
-      {% endif %}
-    </div>
+        </div>
+    </a>
   </div>
 {% endfor %}
 

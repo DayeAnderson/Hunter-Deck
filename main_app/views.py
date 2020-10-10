@@ -13,4 +13,8 @@ def hunters_index(request):
   hunters = Hunter.objects.all()
   return render(request, 'hunters/index.html', { 'hunters': hunters })
 
+def hunters_detail(request, hunter_id):
+  hunter = Hunter.objects.get(id=hunter_id)
+  return render(request, 'hunters/detail.html', { 'hunter': hunter })
+
 
