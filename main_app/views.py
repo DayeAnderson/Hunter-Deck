@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Hunter
 
 # Create your views here.
@@ -21,6 +21,15 @@ def hunters_detail(request, hunter_id):
 class HunterCreate(CreateView):
   model = Hunter
   fields = ['name', 'rank', 'gender', 'favorite_meal']
+  success_url = '/hunters/'
+
+class HunterUpdate(UpdateView):
+  model = Hunter
+  # Let's disallow the renaming of a cat by excluding the name field!
+  fields = ['name', 'rank', 'favorite_meal']
+
+class HunterDelete(DeleteView):
+  model = Hunter
   success_url = '/hunters/'
 
 

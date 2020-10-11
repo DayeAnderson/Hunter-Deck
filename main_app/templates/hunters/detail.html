@@ -14,6 +14,10 @@
         <p>Rank: {{ hunter.rank }}</p>
     {% endif %}
   </div>
+  <div class="card-action">
+    <a href="{% url 'hunters_update' hunter.id %}">Edit</a>
+    <a href="{% url 'hunters_delete' hunter.id %}">Delete</a>
+  </div>
 </div>
 
 {% endblock %}
