@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Hunter
+from django.views.generic import ListView, DetailView
+from .models import Hunter, Weapon
 
 # Create your views here.
 
@@ -16,7 +17,9 @@ def hunters_index(request):
 
 def hunters_detail(request, hunter_id):
   hunter = Hunter.objects.get(id=hunter_id)
-  return render(request, 'hunters/detail.html', { 'hunter': hunter })
+  weapons_hunter_doesnt_have = Weapon.objects.exclude(id__in = hunter.weapons.all().values_list('id'))
+  return render(request, 'hunters/detail.html', { 'hunter': hunter, 'weapons': weapons_hunter_doesnt_have
+ })
 
 class HunterCreate(CreateView):
   model = Hunter
@@ -32,4 +35,26 @@ class HunterDelete(DeleteView):
   model = Hunter
   success_url = '/hunters/'
 
+class WeaponList(ListView):
+  model = Weapon
+
+class WeaponDetail(DetailView):
+  model = Weapon
+
+class WeaponCreate(CreateView):
+  model = Weapon
+  fields = '__all__'
+
+class WeaponUpdate(UpdateView):
+  model = Weapon
+  fields = ['name', 'type', 'rarity']
+
+class WeaponDelete(DeleteView):
+  model = Weapon
+  success_url = '/weapons/'
+
+def assoc_weapon(request, hunter_id, weapon_id):
+  # Note that you can pass a toy's id instead of the whole object
+  Hunter.objects.get(id=hunter_id).weapons.add(weapon_id)
+  return redirect('detail', hunter_id=hunter_id)
 
