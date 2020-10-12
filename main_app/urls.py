@@ -15,6 +15,7 @@ urlpatterns = [
   path('weapons/<int:pk>/update/', views.WeaponUpdate.as_view(), name='weapons_update'),
   path('weapons/<int:pk>/delete/', views.WeaponDelete.as_view(), name='weapons_delete'),
   path('hunters/<int:hunter_id>/assoc_weapon/<int:weapon_id>/', views.assoc_weapon, name='assoc_weapon'),
+  path('accounts/signup/', views.signup, name='signup'),
 
 
 ]

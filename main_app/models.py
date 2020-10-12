@@ -1,7 +1,25 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
+
+# WEAPON_CHOICES= (
+#     ('great_sword', 'Great Sword'),
+#     ('sword_&_shield', 'Sword & Shield'),
+#     ('dual_blades', 'Dual Blades'),
+#     ('long_sword', 'Long Sword'),
+#     ('hammer', 'Hammer'),
+#     ('hunting_horn', 'Hunting Horn'),
+#     ('lance', 'Lance'),
+#     ('gunlance', 'Gunlance'),
+#     ('switch_axe', 'Switch Axe'),
+#     ('charge_blade', 'Charge Blade'),
+#     ('insect_glaive', 'Insect Glaive'),
+#     ('bow', 'Bow'),
+#     ('light_bowgun', 'Light Bowgun'),
+#     ('heavy_bowgun', 'Heavy Bowgun')
+# )
 
 class Weapon(models.Model):
     name = models.CharField(max_length=100)
@@ -20,6 +38,8 @@ class Hunter(models.Model):
     gender = models.CharField(max_length=100)
     favorite_meal = models.CharField(max_length=100)
     weapons = models.ManyToManyField(Weapon)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
 
     def __str__(self):
