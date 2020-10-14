@@ -40,11 +40,16 @@ class Hunter(models.Model):
     weapons = models.ManyToManyField(Weapon)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-
-
     def __str__(self):
         return self.name
     
   # Add this method
     def get_absolute_url(self):
         return reverse('detail', kwargs={'hunter_id': self.id})
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    hunter = models.ForeignKey(Hunter, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for hunter_id: {self.hunter_id} @{self.url}"
